@@ -5,12 +5,10 @@ Evalution类，攻击算法类。
 """
 
 import os
-import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-
-from object_module import ObjISbox
+#from app.object_module import ObjISbox
 
 """存储数据的类，用于读取存储于文件中的明文、功耗等数据。
 """
