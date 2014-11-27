@@ -15,8 +15,11 @@ app = Flask(__name__)
 app.config.from_object('config')
 
 
-from epar.epar import EvaluationCorr, Data, AttackCorr
-from epar.object_module import ObjISbox
+
+#from epar.epar import EvaluationCorr, Data, AttackCorr
+#from epar.object_module import ObjISbox
 
 
-import epar.views
+import epar.project_views
+import epar.upload_views
+import epar.epar_views

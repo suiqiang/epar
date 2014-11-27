@@ -128,6 +128,7 @@ class AttackCorr:
         haming = list(haming_distance(plain_data, obj, key))
         return np.corrcoef(haming, power_data.transpose())[0, 1:]
 
+
 class EvaluationCorr:
     """相关系数评估
     """

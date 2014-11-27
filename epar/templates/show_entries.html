@@ -1,35 +1,89 @@
 {% extends "layout.html" %}
 {% block body %}
+
   {% if session.logged_in %}
- 
-     <form action="{{ url_for('readplain') }}" method=post class=add-entry>
+    <form action="{{ url_for('add_prj') }}" method=post class=add-entry>
       <dl>
-        <dt>载入明文数据:
-        <dd><input type=text size=30 name=dirname>
-        <dd><input type=submit value=确定>
+        <dt>工程:
+          <dd><input type=text size=30 name=prjname></dd>
+        </dt>
+        <dt>目录:
+          <dd><input type=text size=30 name=prjdir></dd>
+          <dd><input type=submit value=Share></dd>
+        </dt>
       </dl>
     </form>
+
+    <form action="{{ url_for('set_prj') }}" method=post class=add-entry>
+      <dl>
+        <dt>工程:
+          <dd><input type=text size=30 name=prjname></dd>
+        </dt>
+        <dt>目录:
+          <dd><input type=text size=30 name=prjdir></dd>
+          <dd><input type=submit value=Share></dd>
+        </dt>
+      </dl>
+    </form>
+
+    <form action="{{ url_for('upload_plain') }}" method="post" enctype="multipart/form-data">
+      <dt>上传明文数据：
+        <dd><input type="file" multiple="" name="file[]" class="add-entry"></dd>
+        <dd><input type="submit" value="Upload"  class="add-entry"></dd>
+      </dt>
+    </form>
+
+   <form action="{{ url_for('upload_power') }}" method="post" enctype="multipart/form-data">
+      <dt>上传功耗数据：
+        <dd><input type="file" multiple="" name="file[]" class="add-entry"></dd>
+        <dd><input type="submit" value="Upload"  class="add-entry"></dd>
+      </dt>
+    </form>
+
+
+    <form action="{{ url_for('readplain') }}" method=post class=add-entry>
+      <dl>
+        <dt>载入明文数据:
+          <dd><input type=text size=30 name=dirname></dd>
+          <dd><input type=submit value=确定></dd>
+        </dt>
+      </dl>
+    </form>
+
     <form action="{{ url_for('readpower', power=POWER) }}" method=post class=add-entry>
       <dl>
         <dt>载入功耗数据:
-        <dd><input type=text size=30 name=dirname>
-        <dd><input type=submit value=确定>
+          <dd><input type=text size=30 name=dirname></dd>
+          <dd><input type=submit value=确定></dd>
+        </dt>
       </dl>
     </form>
+
     <form action="{{ url_for('do_attack') }}" method=post class=add-entry>
       <dl>
         <dt>选取样本数量:
-        <dd><input type=number size=30 name=samples>
-        <dd><input type=submit value=攻击>
+          <dd><input type=number size=30 name=samples></dd>
+          <dd><input type=submit value=攻击></dd>
+        </dt>
       </dl>
     </form>
+
     <form action="{{ url_for('do_evaluation') }}" method=post class=add-entry>
       <dl>
         <dt>输入正确密钥:
-        <dd><input type=number size=30 name=truekey>
-        <dd><input type=submit value=评估>
+          <dd><input type=number size=30 name=truekey></dd>
+          <dd><input type=submit value=评估></dd>
+        </dt>
       </dl>
     </form>
   {% endif %}
- 
+
+  <ul class=entries>
+    {% for entry in entries %}
+      <li><h2>{{ entry.prjname }}</h2>{{ entry.prjdir|safe }}
+    {% else %}
+      <li><em>Unbelievable.  No entries here so far</em>
+    {% endfor %}
+  </ul>
+
 {% endblock %}

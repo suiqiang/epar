@@ -1,25 +1,17 @@
 from epar import app
+
+
 from flask import request, session, g, redirect, url_for, \
      abort, render_template, flash
 
 from epar.epar import EvaluationCorr, Data, AttackCorr
 from epar.object_module import ObjISbox
 
-
 POWER = Data()
 PLAIN = Data()
 OBJECTIVE = ObjISbox()
 ATTACK = AttackCorr()
 EVALUATION = EvaluationCorr()
-
-
-
-
-@app.route('/')
-def show_entries():
-    return render_template('show_entries.html')
-
-
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -44,11 +36,28 @@ def logout():
     return redirect(url_for('show_entries'))
 
 
+# @app.route('/readplain', methods=['POST'])
+# def readplain():
+#     if not session.get('logged_in'):
+#         abort(401)
+#     PLAIN.read_dir(request.form['dirname'], int, 1)
+#     flash('明文数据载入完成!')
+#     return redirect(url_for('show_entries'))
+
+
+# @app.route('/readpower', methods=['POST'])
+# def readpower():
+#     if not session.get('logged_in'):
+#         abort(401)
+#     POWER.read_dir(request.form['dirname'], float, 400)
+#     flash('功耗数据载入完成!')
+#     return redirect(url_for('show_entries'))
+
 @app.route('/readplain', methods=['POST'])
 def readplain():
     if not session.get('logged_in'):
         abort(401)
-    PLAIN.read_dir(request.form['dirname'], int, 1)
+    PLAIN.read_dir(''.join([app.config['PRJDIR'], '/plain/']), int, 1)
     flash('明文数据载入完成!')
     return redirect(url_for('show_entries'))
 
@@ -57,7 +66,7 @@ def readplain():
 def readpower():
     if not session.get('logged_in'):
         abort(401)
-    POWER.read_dir(request.form['dirname'], float, 400)
+    POWER.read_dir(''.join([app.config['PRJDIR'], '/power/']), float, 400)
     flash('功耗数据载入完成!')
     return redirect(url_for('show_entries'))
 
@@ -83,4 +92,4 @@ def do_evaluation():
     EVALUATION.do_evaluation(ATTACK._mat_corr, int(request.form['truekey']))
     flash('评估完成')
     flash(EVALUATION._result['0.99'])
-    return redirect(url_for('show_entries')) 
+    return redirect(url_for('show_entries'))
