@@ -1,6 +1,11 @@
 <!doctype html>
+<head>
 <title>EPAR</title>
 <link href="/static/css/style.css" rel="stylesheet" media="screen">
+{% block head %}{% endblock%}
+</head>
+
+<body>
 <div class=page>
   <h1>抗攻击测评</h1>
   <div class=metanav>
@@ -15,3 +20,5 @@
   {% endfor %}
   {% block body %}{% endblock %}
 </div> 
+</body>
+</html>
