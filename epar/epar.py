@@ -8,7 +8,8 @@ import os
 import numpy as np
 import math
 
-#from app.object_module import ObjISbox
+# import matplotlib.pyplot as plt
+# from object_module import ObjISbox
 
 """存储数据的类，用于读取存储于文件中的明文、功耗等数据。
 """
@@ -78,7 +79,7 @@ class AttackCorr:
         """result存放攻击结果数据。
         """
         self._mat_corr = np.array([])
-        self._result = []
+        self._result = None
 
     def do_attack(self, obj_module, plain, power, sum_key):
         """对目标object抗攻击能力进行评估。

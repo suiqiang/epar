@@ -4,7 +4,7 @@ h1, h2          { font-family: 'Georgia', serif; margin: 0; }
 h1              { border-bottom: 2px solid #eee; }
 h2              { font-size: 1.2em; }
 
-.page           { margin: 2em auto; width: 35em; border: 5px solid #ccc;
+.page           { margin: 4em auto; width: 60em; border: 5px solid #ccc;
                   padding: 0.8em; background: white; }
 .entries        { list-style: none; margin: 0; padding: 0; }
 .entries li     { margin: 0.8em 1.2em; }
@@ -13,6 +13,62 @@ h2              { font-size: 1.2em; }
 .add-entry dl   { font-weight: bold; }
 .metanav        { text-align: right; font-size: 0.8em; padding: 0.3em;
                   margin-bottom: 1em; background: #fafafa; }
+
 .flash          { background: #cee5F5; padding: 0.5em;
                   border: 1px solid #aacbe2; }
+
+.notice         { background: #cee5F5; padding: 0.5em;
+                  border: 1px solid #aacbe2; }
 .error          { background: #f0d6d6; padding: 0.5em; } 
+
+
+
+
+/* idTabs的显示设置。suiqiang*/
+.idTabs {
+    color:#111;
+    width:700px;
+    margin:8px auto;
+}
+
+.idTabs ul {
+    background:gray;
+    padding:0px;
+    float:left;
+}
+
+.idTabs ul a{
+    display:block;
+    padding:6px 10px;
+    text-decoration:none!important;
+    margin:1px 1px 1px 0;
+    color:gray;
+    Background:#444;
+}
+
+.idTabs ul a:hover {
+    color:#FFF;
+    Background::
+}
+
+.idTabs ul a.selected {
+    margin-bottom:0;
+    color:#000;
+    background:snow;
+    border-bottom:1px solid snow;
+    cursor:default;
+}
+
+.idTabs div {
+    padding:10px 10px 8px 10px;
+    *padding-top:3px;
+    *margin-top:-15px;
+    clear:left;
+    background:snow;
+    height:580px;
+}
+
+.idTabs ul li {
+    list-style:none;
+    float:left;
+}

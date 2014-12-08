@@ -4,23 +4,29 @@
   {% if session.logged_in %}
     <form action="{{ url_for('add_prj') }}" method=post class=add-entry>
       <dl>
-        <dt>工程:
-          <dd><input type=text size=30 name=prjname></dd>
+        <dt>新建工程:
+          <dd><input type="text" size="30" name="prjname"></dd>
         </dt>
-        <dt>目录:
-          <dd><input type=text size=30 name=prjdir></dd>
-          <dd><input type=submit value=Share></dd>
+        <dt>说明:
+          <dd><textarea name="description" rows="5" cols="40"></textarea></dd>
+          <dd><input type=submit value=确定></dd>
+        </dt>
+      </dl>
+    </form>
+
+    <form action="{{ url_for('remove_prj') }}" method=post class=add-entry>
+      <dl>
+        <dt>删除工程:
+          <dd><input type="text" size=30 name=prjname></dd>
+          <dd><input type="submit" value="确定"></dd>
         </dt>
       </dl>
     </form>
 
     <form action="{{ url_for('set_prj') }}" method=post class=add-entry>
       <dl>
-        <dt>工程:
+        <dt>设置工程:
           <dd><input type=text size=30 name=prjname></dd>
-        </dt>
-        <dt>目录:
-          <dd><input type=text size=30 name=prjdir></dd>
           <dd><input type=submit value=Share></dd>
         </dt>
       </dl>

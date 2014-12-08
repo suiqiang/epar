@@ -7,7 +7,7 @@ import os
 # and send_from_directory will help us to send/show on the
 # browser the file that the user just uploaded
 
-from flask import render_template, request, send_from_directory, jsonify
+from flask import render_template, request, send_from_directory
 
 
 from werkzeug.utils import secure_filename
@@ -50,13 +50,13 @@ def upload_plain():
             # Redirect the user to the uploaded_file route, which
             # will basicaly show on the browser the uploaded file
     # Load an html page with a link to each uploaded file
-    return render_template('upload.html', filenames=filenames)
+    return render_template('upload.html', filenames=filenames, dirname='plain')
 
 
 # @app.route('/upload_plain', methods=['POST'])
 # def upload_plain():
 #     # Get the name of the uploaded files
-#     uploaded_files = request.files.getlist("file[]")
+#     uploaded_files = request.files.getlist['file[]']
 #     filenames = []
 #     for file in uploaded_files:
 #         # Check if the file is one of the allowed types/extensions
@@ -71,7 +71,7 @@ def upload_plain():
 #             # Redirect the user to the uploaded_file route, which
 #             # will basicaly show on the browser the uploaded file
 #     # Load an html page with a link to each uploaded file
-#     return jsonify(filenames=filenames)
+#     return jsonify(filenames)
 
 
 
@@ -93,7 +93,7 @@ def upload_power():
             # Redirect the user to the uploaded_file route, which
             # will basicaly show on the browser the uploaded file
     # Load an html page with a link to each uploaded file
-    return render_template('upload.html', filenames=filenames)
+    return render_template('upload.html', filenames=filenames, dirname='power')
 
 
 
@@ -103,12 +103,11 @@ def upload_power():
 # an image, that image is going to be show after the upload
 # http://www.sharejs.com
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(
-        os.path.join(
-            os.path.abspath(os.path.dirname(__file__)),
-            app.config['PRJDIR'],
-            'plain'),
+@app.route('/uploads/<path:dirname>/<filename>')
+def uploaded_file(dirname, filename):
+    return send_from_directory(os.path.join(
+        os.getcwd(),
+        app.config['PRJDIR'],
+        dirname),
                                filename)
 

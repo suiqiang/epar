@@ -1,0 +1,99 @@
+{% extends "layout.html" %
+{% block head %}}
+
+<meta name="显示结果" content="显示功耗攻击的结果" />
+<script src="{{ url_for('static/js/rgraph', filename='RGraph.common.core.js') }}"></script>
+<script src="{{ url_for('static/js/rgraph', filename='RGraph.line.js') }}"></script>
+<!--[if lt IE 9]><script src="../excanvas/excanvas.js"></script><![endif]-->
+<script src="{{ url_for('static/js/jquery', filename='jquery-1.11.1.min.js') }}"></script>
+<script src="{{ url_for('static/js/jquery', filename='jquery.idTabs.min.js') }}"></script>
+<!doctype html>
+<html>
+    <head>
+        <title>EPAR</title>
+        <link href="/static/css/style.css" rel="stylesheet" media="screen">
+        {% block head %}{% endblock%}
+    </head>
+        <body>
+            <div class=page>
+                <h1>抗攻击测评</h1>
+                <div class=metanav>
+                    {% if not session.logged_in %}
+                        <a href="{{ url_for('login') }}">log in</a>
+                    {% else %}
+                        <a href="{{ url_for('logout') }}">log out</a>
+                    {% endif %}
+                </div>
+                {% for message in get_flashed_messages() %}
+                    <div class=flash>{{ message }}</div>
+                {% endfor %}
+            {% block body %}{% endblock %}
+            </div>
+        </body>
+</html>
+
+
+
+{% endblock %}
+
+  <body>
+
+    <h1>A basic example of AJAX and JSON data</h1>
+
+    <p>
+      This is a basic example of using JSON and AJAX. AJAX is used to request the data and it is returned in JSON format. The JSON
+      data is then evaluated and a chart created using it.
+    </p>
+
+    <canvas id="cvs" width="600" height="250">[No canvas support]</canvas>
+
+    <script>
+      /**
+      * Ths window.onload function initiates the AJAX request. The AJAX page is: http://www.rgraph.net/getdata.html?json
+      * If you view this in your browser you'll see that all it does is output a JSON object (a JavaScript object).
+      */
+      $(document).ready(function ()
+      {
+      RGraph.AJAX.getJSON('/getdata.html?json', drawGraph);
+      })
+
+
+
+      /**
+      * This is the AJAX callback function. It splits up the response, converts it to numbers and then creates the chart.
+      */
+      function drawGraph (json)
+      {
+
+
+
+      // Set the JSON on the window object so that the button below can show it to the user.
+      window.__json__ = json;
+
+
+
+      // Now draw the chart
+      var line = new RGraph.Line({
+      id: 'cvs',
+      data: json.data,
+      options: {
+      hmargin: 10,
+      linewidth: 2,
+      ymax: 100,
+      labels: json.labels
+      }
+      }).draw()
+      }
+    </script>
+
+    <br/>
+
+    <button onclick="$p(window.__json__)">Show the JSON output</button>
+
+    <p>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.rgraph.net" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http://www.rgraph.net', null, 'top=50,left=50,width=600,height=368'); return false"><img src="../images/facebook-large.png" width="200" height="43" alt="Share on Facebook" border="0" title="Visit the RGraph Facebook page" /></a>
+      <a href="https://twitter.com/_rgraph" target="_blank" onclick="window.open('https://twitter.com/_rgraph', null, 'top=50,left=50,width=700,height=400'); return false"><img src="../images/twitter-large.png" width="200" height="43" alt="Share on Twitter" border="0" title="Mention RGraph on Twitter" /></a>
+    </p>
+
+  </body>
+</html>
