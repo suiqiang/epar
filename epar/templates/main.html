@@ -20,7 +20,7 @@
                 <li><a href="#upload">上传文件</a></li>
                 <li><a href="#epar">功耗评估</a></li>
                 <li><a href="#result">查看结果</a></li>
-                <li><a href="#about">使用说明</a></li>
+                <!-- <li><a href="#about">使用说明</a></li> -->
                 <li><a href="#about">关于</a></li>
             </ul>
 
@@ -120,11 +120,25 @@
             </div>
 
             <div class="tab" id="result">
-                <h4>todo</h4>
+                <P class="add-entry">
+                   <dl id="result_attack_corr"></dl>
+                </P>
+                <P class="add-entry">
+                    <dl id="result_evaluation_corr"></dl>
+                </P>
+                <P class="add-entry">
+                    <dl id="result_attack_mean"></dl>
+                </P>
             </div>
 
             <div class="tab" id="about">
-                <h4>about the epar</h4>
+                <p class="add-entry">
+                    <dl>
+                        <dt>v0.97</dt>
+                        <dt>抗功耗攻击评估软件(epar)由“核高基”项目经费支持，系“密码芯片测评系统”的一部分，由国防科学技术大学计算机学院开发。</dt>
+                        <dt>有疑问，请联系：email。</dt>
+                    </dl>
+                </p>
             </div>
         </div>
     {% endif %}
